@@ -20,6 +20,9 @@ fi
 
 echo "Executing build on branch $TAG_BRANCH version $TAG_VERSION using Dockerfile profile $DOCKERFILE_PATH"
 
+# using BuildKit with docker-container and kubernetes drivers to build multi-platform images
+docker buildx create --use
+
 docker buildx build --platform linux/arm64,linux/amd64 \
              --build-arg TAG="$TAG_BRANCH" \
              --build-arg VERSION="$TAG_VERSION" \
