@@ -2034,49 +2034,6 @@ function install_base() {
   fapt vim                        # Text editor
   install_ultimate_vimrc          # Make vim usable OOFB
   fapt nano                       # Text editor (not the best)
-  fapt emacs-nox
-  fapt jq                         # jq is a lightweight and flexible command-line JSON processor
-  fapt iputils-ping               # Ping binary
-  fapt iproute2                   # Firewall rules
-  fapt openvpn                    # Instal OpenVPN
-  fapt openresolv                 # Dependency for DNS resolv.conf update with OpenVPN connection (using script)
-  echo "/sbin/resolvconf -u" >> /etc/openvpn/update-resolv-conf  # Fixing openresolv to update /etc/resolv.conf without resolvectl daemon
-  install_mdcat                           # cat markdown files
-  install_bat                             # Beautiful cat
-  fapt tidy                       # TODO: comment this
-  fapt amap-align                 # TODO: comment this
-  fapt mlocate                    # TODO: comment this
-  fapt xsel                       # TODO: comment this
-  fapt libtool                    # TODO: comment this
-  fapt dnsutils                   # DNS utilities like dig and nslookup
-  fapt dos2unix                   # Convert encoded dos script
-  DEBIAN_FRONTEND=noninteractive fapt macchanger  # Macchanger
-  fapt samba                      # Samba
-  fapt ftp                        # FTP client
-  fapt ssh                        # SSH client
-  fapt sshpass                    # SSHpass (wrapper for using SSH with password on the CLI)
-  fapt telnet                     # Telnet client
-  fapt nfs-common                 # NFS client
-  fapt snmp                       # TODO: comment this
-  fapt ncat                       # Socket manager
-  fapt netcat-traditional         # Socket manager
-  fapt socat                      # Socket manager
-  #gf_install                      # wrapper around grep
-  fapt rdate                      # tool for querying the current time from a network server
-  fapt putty                      # GUI-based SSH, Telnet and Rlogin client
-  fapt screen                     # CLI-based PuTT-like
-  fapt p7zip-full                 # 7zip
-  fapt p7zip-rar                  # 7zip rar module
-  fapt-noexit rar                        # rar
-  fapt unrar                      # unrar
-  fapt xz-utils                   # xz (de)compression
-  fapt xsltproc                   # apply XSLT stylesheets to XML documents (Nmap reports)
-  install_pipx
-  fapt parallel
-  fapt tree
-  fapt faketime
-  fapt ruby ruby-dev
-  fapt libxml2-utils
 }
 
 # Package dedicated to most used offensive tools
