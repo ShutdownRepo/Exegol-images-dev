@@ -20,10 +20,11 @@ fi
 
 echo "Executing build on branch $TAG_BRANCH version $TAG_VERSION using Dockerfile profile $DOCKERFILE_PATH"
 
-docker build --build-arg TAG="$TAG_BRANCH" \
+docker buildx --platform linux/arm64,linux/amd64 \
+             --build-arg TAG="$TAG_BRANCH" \
              --build-arg VERSION="$TAG_VERSION" \
              --build-arg BUILD_DATE="$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
-             -f "$DOCKERFILE_PATH" \
+             --file "$DOCKERFILE_PATH" \
              $TAG_COMMAND .
 
 echo "Build done!"
