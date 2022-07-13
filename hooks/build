@@ -39,6 +39,4 @@ docker buildx build --platform linux/amd64,linux/arm64 \
              --output "type=image,push=true" \
              $TAG_COMMAND .
 
-docker buildx imagetools inspect nwodtuhs/exegol-dev:nightly
-
-echo "Build done!"
+echo "Build and push done!"
