@@ -1,1 +1,7 @@
+#!/bin/bash
+# Exit on error
+set -e
+
+echo "Running push hook !"
+
 echo "nothing to be done here, image should have been pushed during the build process"
