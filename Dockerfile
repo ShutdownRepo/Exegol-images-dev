@@ -14,17 +14,17 @@ LABEL org.exegol.src_repository="https://github.com/ShutdownRepo/Exegol-images"
 
 RUN echo "${TAG}-${VERSION}" > /opt/.exegol_version
 
-ADD sources /root/sources
-RUN chmod +x /root/sources/install.sh
-
-RUN /root/sources/install.sh install_base
+#ADD sources /root/sources
+#RUN chmod +x /root/sources/install.sh
+#
+#RUN /root/sources/install.sh install_base
 
 # WARNING: install_most_used_tools can't be used with other functions other than: install_base, install_clean
 # RUN /root/sources/install.sh install_most_used_tools
 
 # WARNING: the following installs (except: install_base, install_clean) can't be used with install_most_used_tools
 # this is a temporary limitation
-RUN /root/sources/install.sh install_misc_tools
+#RUN /root/sources/install.sh install_misc_tools
 #RUN /root/sources/install.sh install_wordlists_tools
 #RUN /root/sources/install.sh install_cracking_tools
 #RUN /root/sources/install.sh install_osint_tools
@@ -46,9 +46,9 @@ RUN /root/sources/install.sh install_misc_tools
 #RUN /root/sources/install.sh install_crypto_tools
 #RUN /root/sources/install.sh install_code_analysis_tools
 
-RUN /root/sources/install.sh install_clean
+#RUN /root/sources/install.sh install_clean
 
-RUN rm -rf /root/sources
+#RUN rm -rf /root/sources
 
 WORKDIR /data
 #CMD ["/bin/zsh"]
