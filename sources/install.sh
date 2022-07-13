@@ -1977,13 +1977,9 @@ function install_rust_cargo() {
 
 function install_base() {
   update || exit
-  echo '# Debian sources' | tee -a /etc/apt/sources.list
-  echo 'deb http://deb.debian.org/debian/ bullseye main' | tee -a /etc/apt/sources.list
-  echo 'deb-src http://deb.debian.org/debian/ bullseye main' | tee -a /etc/apt/sources.list
-  echo 'deb http://security.debian.org/debian-security bullseye-security main contrib' | tee -a /etc/apt/sources.list
-  echo 'deb-src http://security.debian.org/debian-security bullseye-security main contrib' | tee -a /etc/apt/sources.list
-  echo 'deb http://deb.debian.org/debian/ bullseye-updates main contrib' | tee -a /etc/apt/sources.list
-  echo 'deb-src http://deb.debian.org/debian/ bullseye-updates main contrib' | tee -a /etc/apt/sources.list
+  fapt software-properties-common
+  add-apt-repository contrib
+  add-apt-repository non-free
   apt-get update
   fapt man                        # Most important
   fapt git                        # Git client
@@ -1996,6 +1992,7 @@ function install_base() {
   fapt sudo                       # Sudo
   fapt curl                       # HTTP handler
   fapt wget                       # Wget
+  fapt gnupg2                     # gnugpg
   fapt python3-pyftpdlib          # FTP server python library
   fapt php                        # Php language
   fapt python2                    # Python 2 language
@@ -2003,14 +2000,17 @@ function install_base() {
   fapt python2-dev                # Python 2 language (dev version)
   fapt python3-dev                # Python 3 language (dev version)
   fapt python3-venv
+  install_rust_cargo
   ln -s /usr/bin/python2.7 /usr/bin/python  # fix shit
   python-pip                      # Pip
   fapt python3-pip                # Pip
   filesystem
+  set_env
   locales
   tmux                            # Tmux
   fapt zsh                        # Awesome shell
   install_ohmyzsh                         # Awesome shell
+  install_tldr                    # TL;DR man
   fapt python-setuptools
   fapt python3-setuptools
   python3 -m pip install wheel
@@ -2019,7 +2019,7 @@ function install_base() {
   install_grc
   fapt npm                        # Node Package Manager
   install_nvm
-  fapt golang                     # Golang language
+  install_go                      # Golang language
   fapt gem                        # Install ruby packages
   fapt automake                   # Automake
   fapt autoconf                   # Autoconf
@@ -2040,10 +2040,11 @@ function install_base() {
   fapt iproute2                   # Firewall rules
   fapt openvpn                    # Instal OpenVPN
   fapt openresolv                 # Dependency for DNS resolv.conf update with OpenVPN connection (using script)
+  echo "/sbin/resolvconf -u" >> /etc/openvpn/update-resolv-conf  # Fixing openresolv to update /etc/resolv.conf without resolvectl daemon
   install_mdcat                           # cat markdown files
   install_bat                             # Beautiful cat
   fapt tidy                       # TODO: comment this
-  fapt amap                       # TODO: comment this
+  fapt amap-align                 # TODO: comment this
   fapt mlocate                    # TODO: comment this
   fapt xsel                       # TODO: comment this
   fapt libtool                    # TODO: comment this
@@ -2066,7 +2067,7 @@ function install_base() {
   fapt screen                     # CLI-based PuTT-like
   fapt p7zip-full                 # 7zip
   fapt p7zip-rar                  # 7zip rar module
-  fapt rar                        # rar
+  fapt-noexit rar                        # rar
   fapt unrar                      # unrar
   fapt xz-utils                   # xz (de)compression
   fapt xsltproc                   # apply XSLT stylesheets to XML documents (Nmap reports)
@@ -2074,6 +2075,8 @@ function install_base() {
   fapt parallel
   fapt tree
   fapt faketime
+  fapt ruby ruby-dev
+  fapt libxml2-utils
 }
 
 # Package dedicated to most used offensive tools
@@ -2280,7 +2283,7 @@ function install_web_tools() {
   install_ysoserial               # Deserialization payloads
   fapt whatweb                    # Recognises web technologies including content management
   phpggc                          # php deserialization payloads
-  symfony_exploits                #  symfony secret fragments exploit
+  symfony_exploits                #  symfony secret fragments exploit
   jdwp_shellifier                 # exploit java debug
   install_httpmethods             # Tool for HTTP methods enum & verb tampering
   install_h2csmuggler             # Tool for HTTP2 smuggling
