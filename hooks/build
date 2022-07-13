@@ -4,7 +4,6 @@ set -e
 
 echo "Running build hook !"
 TAG_COMMAND="-t $IMAGE_NAME"
-echo "debug: image_name = $IMAGE_NAME"
 
 if [[ "$DOCKER_TAG" == *"-"* ]]; then
   # If the current build tag has a version specific number, parse branch / version for image labels
@@ -16,7 +15,7 @@ else
   # For image without version (like dev), use default build options
   TAG_BRANCH=$DOCKER_TAG
   TAG_VERSION=${SOURCE_COMMIT:0:8}
-  echo "Single tag: $DOCKER_TAG (version from commit hash)"
+  echo "Single tag: $IMAGE_NAME"
 fi
 
 echo "Executing build on branch $TAG_BRANCH version $TAG_VERSION using Dockerfile profile $DOCKERFILE_PATH"
