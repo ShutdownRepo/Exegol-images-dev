@@ -4,6 +4,7 @@ set -e
 
 echo "Running build hook !"
 TAG_COMMAND="-t $IMAGE_NAME"
+echo "debug: image_name = $IMAGE_NAME"
 
 if [[ "$DOCKER_TAG" == *"-"* ]]; then
   # If the current build tag has a version specific number, parse branch / version for image labels
