@@ -3,7 +3,7 @@
 set -e
 
 echo "Running build hook !"
-TAG_COMMAND="-t $IMAGE_NAME"
+TAG_COMMAND="--tag $IMAGE_NAME"
 
 if [[ "$DOCKER_TAG" == *"-"* ]]; then
   # If the current build tag has a version specific number, parse branch / version for image labels
@@ -38,5 +38,7 @@ docker buildx build --platform linux/amd64,linux/arm64 \
              --progress plain \
              --output "type=image" \
              $TAG_COMMAND .
+
+docker buildx imagetools inspect nwodtuhs/exegol-dev
 
 echo "Build done!"
