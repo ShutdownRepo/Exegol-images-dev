@@ -15,7 +15,7 @@ else
   # For image without version (like dev), use default build options
   TAG_BRANCH=$DOCKER_TAG
   TAG_VERSION=${SOURCE_COMMIT:0:8}
-  echo "Single tag: $IMAGE_NAME"
+  echo "Single-tagging: $IMAGE_NAME"
 fi
 
 echo "Executing build on branch $TAG_BRANCH version $TAG_VERSION using Dockerfile profile $DOCKERFILE_PATH"
