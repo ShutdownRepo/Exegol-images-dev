@@ -1977,9 +1977,13 @@ function install_rust_cargo() {
 
 function install_base() {
   update || exit
-  fapt software-properties-common
-  add-apt-repository contrib
-  add-apt-repository non-free
+  echo '# Debian sources' | tee -a /etc/apt/sources.list
+  echo 'deb http://deb.debian.org/debian/ bullseye main' | tee -a /etc/apt/sources.list
+  echo 'deb-src http://deb.debian.org/debian/ bullseye main' | tee -a /etc/apt/sources.list
+  echo 'deb http://security.debian.org/debian-security bullseye-security main contrib' | tee -a /etc/apt/sources.list
+  echo 'deb-src http://security.debian.org/debian-security bullseye-security main contrib' | tee -a /etc/apt/sources.list
+  echo 'deb http://deb.debian.org/debian/ bullseye-updates main contrib' | tee -a /etc/apt/sources.list
+  echo 'deb-src http://deb.debian.org/debian/ bullseye-updates main contrib' | tee -a /etc/apt/sources.list
   apt-get update
   fapt man                        # Most important
   fapt git                        # Git client
@@ -1992,7 +1996,6 @@ function install_base() {
   fapt sudo                       # Sudo
   fapt curl                       # HTTP handler
   fapt wget                       # Wget
-  fapt gnupg2                     # gnugpg
   fapt python3-pyftpdlib          # FTP server python library
   fapt php                        # Php language
   fapt python2                    # Python 2 language
@@ -2000,17 +2003,14 @@ function install_base() {
   fapt python2-dev                # Python 2 language (dev version)
   fapt python3-dev                # Python 3 language (dev version)
   fapt python3-venv
-  install_rust_cargo
   ln -s /usr/bin/python2.7 /usr/bin/python  # fix shit
   python-pip                      # Pip
   fapt python3-pip                # Pip
   filesystem
-  set_env
   locales
   tmux                            # Tmux
   fapt zsh                        # Awesome shell
   install_ohmyzsh                         # Awesome shell
-  install_tldr                    # TL;DR man     
   fapt python-setuptools
   fapt python3-setuptools
   python3 -m pip install wheel
@@ -2019,7 +2019,7 @@ function install_base() {
   install_grc
   fapt npm                        # Node Package Manager
   install_nvm
-  install_go                      # Golang language
+  fapt golang                     # Golang language
   fapt gem                        # Install ruby packages
   fapt automake                   # Automake
   fapt autoconf                   # Autoconf
@@ -2034,6 +2034,46 @@ function install_base() {
   fapt vim                        # Text editor
   install_ultimate_vimrc          # Make vim usable OOFB
   fapt nano                       # Text editor (not the best)
+  fapt emacs-nox
+  fapt jq                         # jq is a lightweight and flexible command-line JSON processor
+  fapt iputils-ping               # Ping binary
+  fapt iproute2                   # Firewall rules
+  fapt openvpn                    # Instal OpenVPN
+  fapt openresolv                 # Dependency for DNS resolv.conf update with OpenVPN connection (using script)
+  install_mdcat                           # cat markdown files
+  install_bat                             # Beautiful cat
+  fapt tidy                       # TODO: comment this
+  fapt amap                       # TODO: comment this
+  fapt mlocate                    # TODO: comment this
+  fapt xsel                       # TODO: comment this
+  fapt libtool                    # TODO: comment this
+  fapt dnsutils                   # DNS utilities like dig and nslookup
+  fapt dos2unix                   # Convert encoded dos script
+  DEBIAN_FRONTEND=noninteractive fapt macchanger  # Macchanger
+  fapt samba                      # Samba
+  fapt ftp                        # FTP client
+  fapt ssh                        # SSH client
+  fapt sshpass                    # SSHpass (wrapper for using SSH with password on the CLI)
+  fapt telnet                     # Telnet client
+  fapt nfs-common                 # NFS client
+  fapt snmp                       # TODO: comment this
+  fapt ncat                       # Socket manager
+  fapt netcat-traditional         # Socket manager
+  fapt socat                      # Socket manager
+  #gf_install                      # wrapper around grep
+  fapt rdate                      # tool for querying the current time from a network server
+  fapt putty                      # GUI-based SSH, Telnet and Rlogin client
+  fapt screen                     # CLI-based PuTT-like
+  fapt p7zip-full                 # 7zip
+  fapt p7zip-rar                  # 7zip rar module
+  fapt rar                        # rar
+  fapt unrar                      # unrar
+  fapt xz-utils                   # xz (de)compression
+  fapt xsltproc                   # apply XSLT stylesheets to XML documents (Nmap reports)
+  install_pipx
+  fapt parallel
+  fapt tree
+  fapt faketime
 }
 
 # Package dedicated to most used offensive tools
